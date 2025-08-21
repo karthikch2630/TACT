@@ -1,6 +1,6 @@
-import React from "react";
 
-import TactLanding from "./componenets/TACTLanding2";
+
+import TactLanding from "./componenets/TactLanding";
 
 function App() {
   return <TactLanding />;

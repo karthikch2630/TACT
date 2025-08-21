@@ -27,7 +27,7 @@ const Sidebar: React.FC<SidebarProps> = ({
     <motion.div
       className="fixed left-4 top-8 h-screen flex items-start z-50"
       initial={{ opacity: 0, x: -50 }}
-      animate={{ opacity: 1, x: 0 }} // ✅ always bright, no dim overlay
+      animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
     >
       {/* Vertical text */}
@@ -46,7 +46,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                   ? "#f97316"
                   : "transparent",
               opacity:
-                initialAnimationComplete && index < currentSection ? 1 : 0.3, // ✅ fades
+                initialAnimationComplete && index < currentSection ? 1 : 0.3,
             }}
             transition={{
               duration: 0.6,
@@ -65,13 +65,13 @@ const Sidebar: React.FC<SidebarProps> = ({
             style={{ WebkitTextStroke: "1px gray", color: "transparent" }}
             animate={{
               opacity:
-                initialAnimationComplete && index < currentSection ? 1 : 0.2, // ✅ fade effect
+                initialAnimationComplete && index < currentSection ? 1 : 0.2,
             }}
             transition={{
               duration: 0.6,
               ease: "easeInOut",
               delay: (tactText.length + index) * 0.15,
-              repeat: Infinity, // ✅ keeps fading
+              repeat: Infinity,
               repeatType: "reverse",
             }}
           >
@@ -87,7 +87,7 @@ const Sidebar: React.FC<SidebarProps> = ({
           alt="Tact Logo"
           className="h-[110px] w-auto object-contain mb-20 relative z-60"
           style={{ y: logoY, x: logoX }}
-          animate={{ opacity: 1 }} // ✅ always bright
+          animate={{ opacity: 1 }}
           onError={handleImageError}
         />
       </div>

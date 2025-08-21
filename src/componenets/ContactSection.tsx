@@ -1,23 +1,25 @@
-import React, { useState } from 'react';
+import { useState } from "react";
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
+    name: "",
+    email: "",
+    message: "",
   });
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
+    console.log("Form submitted:", formData);
     // Handle form submission logic here
   };
 
@@ -28,11 +30,16 @@ const ContactSection = () => {
           {/* Left Column - Large Text */}
           <div className="col-span-4 space-y-0">
             <h2 className="text-8xl font-bold text-gray-200 leading-[0.85] tracking-tight">
-              WARM<br />
-              TEA<br />
-              BOLD<br />
-              IDEAS<br />
-              AT<br />
+              WARM
+              <br />
+              TEA
+              <br />
+              BOLD
+              <br />
+              IDEAS
+              <br />
+              AT
+              <br />
               <span className="text-[#f97316]">TACT</span>
             </h2>
           </div>
@@ -48,12 +55,16 @@ const ContactSection = () => {
               </p>
             </div>
 
-            <div className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="block text-gray-600 text-sm font-medium mb-1">
+                <label
+                  htmlFor="name"
+                  className="block text-gray-600 text-sm font-medium mb-1"
+                >
                   Your Tactical Name*
                 </label>
                 <input
+                  id="name"
                   type="text"
                   name="name"
                   value={formData.name}
@@ -64,10 +75,14 @@ const ContactSection = () => {
               </div>
 
               <div>
-                <label className="block text-gray-600 text-sm font-medium mb-1">
+                <label
+                  htmlFor="email"
+                  className="block text-gray-600 text-sm font-medium mb-1"
+                >
                   E-Mail*
                 </label>
                 <input
+                  id="email"
                   type="email"
                   name="email"
                   value={formData.email}
@@ -78,10 +93,14 @@ const ContactSection = () => {
               </div>
 
               <div>
-                <label className="block text-gray-600 text-sm font-medium mb-1">
+                <label
+                  htmlFor="message"
+                  className="block text-gray-600 text-sm font-medium mb-1"
+                >
                   We're listening*
                 </label>
                 <textarea
+                  id="message"
                   name="message"
                   value={formData.message}
                   onChange={handleInputChange}
@@ -92,12 +111,12 @@ const ContactSection = () => {
               </div>
 
               <button
-                onClick={handleSubmit}
+                type="submit"
                 className="w-full bg-gray-600 text-white py-3 px-6 text-sm font-medium hover:bg-gray-700 transition-colors duration-300 mt-6"
               >
                 Ready to Roll
               </button>
-            </div>
+            </form>
           </div>
 
           {/* Right Column - Contact Info */}
@@ -108,12 +127,12 @@ const ContactSection = () => {
               <p>Manikonda, Hyderabad,</p>
               <p>Telangana - 500 089.</p>
             </div>
-            
+
             <div className="space-y-0.5 mb-4">
               <p>design.tactadvertising@gmail.com</p>
               <p>mkt.tactadvertising@gmail.com</p>
             </div>
-            
+
             <div>
               <p>+91 7731 88 44 77</p>
             </div>
