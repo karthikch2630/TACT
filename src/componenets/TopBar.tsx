@@ -24,7 +24,7 @@ const TopBar: React.FC<SidebarProps> = ({
       transition={{ duration: 0.8, ease: "easeOut" }}
     >
       <motion.img
-        src="/Tact-logo.png"
+        src="/Tact-loo.png"
         alt="Tact Logo"
         className="h-[60px] w-auto object-contain ml-4 relative z-50"
         style={{ y: logoY, x: logoX }}

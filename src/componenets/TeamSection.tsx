@@ -1,39 +1,31 @@
-import { motion, MotionValue } from "framer-motion";
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
 
-interface TeamSectionProps {
-  opacity: MotionValue<number>;
-  y: MotionValue<number>;
-}
+const TeamSection: React.FC = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { amount: 0.3, once: true }); 
+  // amount: 0.3 → triggers when ~30% of section is visible
 
-const TeamSection: React.FC<TeamSectionProps> = ({ opacity, y }) => {
-  // Array of unique fallback images for each team member
-  const fallbackImages = [
-    "https://res.cloudinary.com/diqux3y0a/image/upload/v1753703594/Gannesh_2_cijnix.jpg",
-    "https://res.cloudinary.com/diqux3y0a/image/upload/v1753703594/Gannesh_2_cijnix.jpg",
-    "https://res.cloudinary.com/diqux3y0a/image/upload/v1753703594/Gannesh_2_cijnix.jpg",
-    "https://res.cloudinary.com/diqux3y0a/image/upload/v1753703594/Gannesh_2_cijnix.jpg",
-    "https://res.cloudinary.com/diqux3y0a/image/upload/v1753703594/Gannesh_2_cijnix.jpg",
-    "https://res.cloudinary.com/diqux3y0a/image/upload/v1753703594/Gannesh_2_cijnix.jpg",
-    "https://res.cloudinary.com/diqux3y0a/image/upload/v1753703594/Gannesh_2_cijnix.jpg",
-    "https://res.cloudinary.com/diqux3y0a/image/upload/v1753703594/Gannesh_2_cijnix.jpg",
-    "https://res.cloudinary.com/diqux3y0a/image/upload/v1753703594/Gannesh_2_cijnix.jpg",
-  ];
+  // fallback images
+  const fallbackImages = Array(9).fill(
+    "https://res.cloudinary.com/diqux3y0a/image/upload/v1753703594/Gannesh_2_cijnix.jpg"
+  );
 
   const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
     const index = parseInt(e.currentTarget.alt.slice(-1)) - 1 || 0;
-    e.currentTarget.src = fallbackImages[index % fallbackImages.length] || fallbackImages[0];
-    e.currentTarget.src = e.currentTarget.className.includes("w-full")
-      ? `${e.currentTarget.src}?w=400&h=500&fit=crop&crop=face&brightness=75`
-      : `${e.currentTarget.src}?w=200&h=200&fit=crop&crop=face&brightness=75`;
+    e.currentTarget.src = fallbackImages[index % fallbackImages.length];
   };
 
   return (
-    <section className="min-h-screen flex items-center justify-center bg-white pl-[180px] py-20">
+    <section
+      ref={ref}
+      className="min-h-screen flex items-center justify-center bg-white pl-[180px] py-20"
+    >
       <motion.div
         className="w-full max-w-7xl px-10"
         initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 50 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        style={{ opacity, y }}
       >
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
           {/* Left Column - Text */}
@@ -44,6 +36,7 @@ const TeamSection: React.FC<TeamSectionProps> = ({ opacity, y }) => {
               <span className="text-[#f97316]">TACT</span>
             </h2>
           </div>
+
           {/* Middle Column - Main Picture */}
           <div className="relative">
             <div className="mb-8">
@@ -53,7 +46,6 @@ const TeamSection: React.FC<TeamSectionProps> = ({ opacity, y }) => {
                   alt="Gannesh Krishna Ettam 1"
                   className="w-full h-full object-cover brightness-125"
                   onError={handleImageError}
-                  style={{ opacity: 1 }}
                 />
                 <div className="absolute top-4 right-4 w-3 h-3 bg-white rounded-full"></div>
               </div>
@@ -65,6 +57,7 @@ const TeamSection: React.FC<TeamSectionProps> = ({ opacity, y }) => {
               </div>
             </div>
           </div>
+
           {/* Right Column - Small Pictures */}
           <div className="grid grid-cols-4 grid-rows-2 gap-4 -ml-20">
             {[...Array(8)].map((_, index) => (
@@ -75,7 +68,6 @@ const TeamSection: React.FC<TeamSectionProps> = ({ opacity, y }) => {
                     alt={`Gannesh Krishna Ettam ${index + 2}`}
                     className="w-full h-full object-cover brightness-125"
                     onError={handleImageError}
-                    style={{ opacity: 1 }}
                   />
                   <div className="absolute top-2 right-2 w-2 h-2 bg-white rounded-full"></div>
                 </div>

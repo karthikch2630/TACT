@@ -98,7 +98,7 @@ const TactLanding: React.FC = () => {
   const teamOpacity = useTransform(
     scrollYProgress, 
     [0.4, 0.5, 0.65, 0.75], 
-    [0, 1, 1, 0]
+    [1, 1, 1, 0]
   );
   const teamY = useTransform(
     scrollYProgress, 
@@ -106,16 +106,14 @@ const TactLanding: React.FC = () => {
     [50, -50]
   );
 
+  // Contact section - no scrolling effects after appearing
   const contactOpacity = useTransform(
     scrollYProgress, 
     [0.65, 0.75], 
     [0, 1]
   );
-  const contactY = useTransform(
-    scrollYProgress, 
-    [0.75], 
-    [0]
-  );
+  // Create a static motion value for contact Y (no movement)
+  
 
   return (
     <div className="bg-white relative min-h-[400vh]" style={{ scrollBehavior: 'smooth' }}>
@@ -125,7 +123,11 @@ const TactLanding: React.FC = () => {
         logoY={logoY}
         logoX={logoX}
       />
-      <TopBar />
+      <TopBar
+        initialAnimationComplete={initialAnimationComplete}
+        logoY={logoY}
+        logoX={logoX}
+      />
       <IntroSection showInitialContent={showInitialContent} />
       {initialAnimationComplete && (
         <motion.div 
@@ -158,16 +160,15 @@ const TactLanding: React.FC = () => {
               y: teamY,
             }}
           >
-            <TeamSection opacity={teamOpacity} y={teamY} />
+            <TeamSection />
           </motion.div>
           
           <motion.div
             style={{
               opacity: contactOpacity,
-              y: contactY,
             }}
           >
-            <ContactSection opacity={contactOpacity} y={contactY} />
+            <ContactSection />
           </motion.div>
         </motion.div>
       )}
